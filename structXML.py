@@ -47,7 +47,10 @@ def dig(dict,depth=0):
         if result.strip().startswith("<"):
           keylist+="%s<%s%s>\n%s\n%s</%s>\n"%(pad,attrs,x,result,pad,x)
         else:
-          keylist+="%s<%s%s> %s </%s>\n"%(pad,x,attrs,result.strip(),x)
+          if result=='':
+            keylist+="%s<%s%s/>\n"%(pad,x,attrs)
+          else:
+            keylist+="%s<%s%s> %s </%s>\n"%(pad,x,attrs,result.strip(),x)
   else:
     keylist = "%svalue"%pad
   return keylist.strip("\n")
